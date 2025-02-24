@@ -1,7 +1,10 @@
 import csv
 import os
+import subprocess
 
-#test!!!
+filename = "members.csv"
+full_path = os.path.abspath(filename) 
+
 
 default_members = [
     {"id":1,"name":"田中","age":15},{"id":2,"name":"佐藤","age":21}
@@ -19,7 +22,6 @@ def export_to_csv(filename,members=None):
         writer.writeheader()
         writer.writerows(members)
         
-    full_path = os.path.abspath(filename)  
     print(f"{filename}に書き込みを行いました\n保存場所:{full_path}")
         
 def import_from_csv(filename):
@@ -32,16 +34,15 @@ def import_from_csv(filename):
                   "id":int(row["id"]),"name":row["name"],"age":int(row["age"])
                 })
             return members
-filename = "members.csv"
 members=import_from_csv(filename) or default_members
     
 
 #リストに追加する
 while True:
-    menu = int(input("行いたい動作を選択してください\n0:リスト参照\n1:リストの追加\n2:会員を検索\n3:会員を削除\n4:csv出力\n>>"))
+    menu = int(input("行いたい動作を選択してください\n\n0:リスト参照\n1:リストの追加\n2:会員を検索\n3:会員を削除\n4:csv出力\n>>"))
     #0:リストの参照
     if(menu==0):
-        print(members) 
+        subprocess.run(["start","",full_path],shell =True) 
     #1:リストの追加
     if(menu==1):
         while True:
